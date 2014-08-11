@@ -1,0 +1,138 @@
+<?php
+
+function newcustomer_menu() {
+  $items = array();
+ 
+  $items['newcustomer/prefill/country-coordinator'] = array(
+    'page callback' => 'newcustomer_prefill_country_coordinator',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['newcustomer/prefill/local-rep'] = array(
+    'page callback' => 'newcustomer_prefill_local_rep',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+ 
+  return $items;
+}
+
+/**
+ * Returns an option list for local reps based on country
+ * 
+ * @param type $country_id
+ */
+function newcustomer_prefill_local_rep($country_id) {
+  civicrm_initialize();
+  
+  $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
+  
+  $country_cid = _newcustomer_country_id_to_contact_id($country_id);
+  $cids['values'] = array();
+  if ($country_cid) {
+    $params['relationship_type_id'] = $cc_rel_type_id;
+    $params['contact_id_a'] = $country_cid;
+    $params['is_active'] = 1;
+    $cids = _newcustomer_crm_api('relationship', 'get', $params);
+  }
+  
+  $options = array();
+  foreach($cids['values'] as $cid) {
+    $contact_params['contact_id'] = $cid['contact_id_b'];
+    $contact = _newcustomer_crm_api('contact', 'getsingle', $contact_params);
+    $options[$contact['id']] = $contact['display_name'];
+  }
+  
+  $output = '<option value="" selected="selected">No local representative found</option>';
+  if (count($options)) {
+    $output = "";
+    $i = 0;
+    foreach($options as $cid => $option) {
+      if ($i==0) {
+        $output = '<option value="'.$cid.'" selected="selected">'.$option.'</option>';
+      } else {
+        $output .= '<option value="'.$cid.'">'.$option.'</option>';
+      }
+      $i++;
+    }
+  }
+  
+  return drupal_json_output(array('html_output' => $output));
+}
+
+/**
+ * Returns an option list for country coordinators by a specifc country
+ * 
+ * @param type $country_id
+ */
+function newcustomer_prefill_country_coordinator($country_id) {
+  civicrm_initialize();
+  
+  $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator', 'return' => 'id'));
+  
+  $country_cid = _newcustomer_country_id_to_contact_id($country_id);
+  $cids['values'] = array();
+  if ($country_cid) {
+    $params['relationship_type_id'] = $cc_rel_type_id;
+    $params['contact_id_a'] = $country_cid;
+    $params['is_active'] = 1;
+    $cids = _newcustomer_crm_api('relationship', 'get', $params);
+  }
+  
+  $options = array();
+  foreach($cids['values'] as $cid) {
+    $contact_params['contact_id'] = $cid['contact_id_b'];
+    $contact = _newcustomer_crm_api('contact', 'getsingle', $contact_params);
+    $options[$contact['id']] = $contact['display_name'];
+  }
+  
+  $output = '<option value="" selected="selected">No country coordinator found</option>';
+  if (count($options)) {
+    $output = "";
+    $i = 0;
+    foreach($options as $cid => $option) {
+      if ($i==0) {
+        $output = '<option value="'.$cid.'" selected="selected">'.$option.'</option>';
+      } else {
+        $output .= '<option value="'.$cid.'">'.$option.'</option>';
+      }
+      $i++;
+    }
+  }
+  
+  return drupal_json_output(array('html_output' => $output));
+}
+
+function newcustomer_preprocess_page(&$vars, $hook) {
+  drupal_add_js(drupal_get_path('module', 'newcustomer') . '/newcustomer.js');
+    $vars['scripts'] = drupal_get_js(); // necessary in D7?
+}
+
+function _newcustomer_crm_api($entity, $operation, $params) {
+  $params += array(
+    'check_permissions' => FALSE,
+    'version' => 3,
+  );
+  civicrm_initialize();
+  $result = civicrm_api($entity, $operation, $params);
+  if (!empty($result['is_error'])) {
+    $bt = debug_backtrace();
+    $file = explode('/', $bt[0]['file']);
+    watchdog('webform_civicrm', 'The CiviCRM "%function" API function returned the error: "%msg" when called by line !line of !file with the following parameters: "!params"', array('%function' => $entity . ' ' . $operation, '%msg' => $result['error_message'], '!line' => $bt[0]['line'], '!file' => array_pop($file), '!params' => print_r($params, TRUE)), WATCHDOG_ERROR);
+  }
+  return $result;
+}
+
+function _newcustomer_country_id_to_contact_id($country_id) {
+  civicrm_initialize();
+  $gid = civicrm_api3('CustomGroup', 'getvalue', array('return' => 'id', 'name' => 'pumCountry'));
+  $country_field_id = civicrm_api3('CustomField', 'getvalue', array('custom_group_id' => $gid, 'name' => 'civicrm_country_id', 'return' => 'id'));
+  
+  $params['custom_'.$country_field_id] = $country_id;
+  $params['check_permissions'] = false;
+  $contact = civicrm_api3('Contact', 'getsingle', $params);
+  if (isset($contact['id'])) {
+    return $contact['id'];
+  }
+  return false;
+}

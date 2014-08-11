@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/admin/customercontact</path>
+    <page_callback>CRM_Newcustomer_Form_CustomerContactAdmin</page_callback>
+    <title>Customer contact settings</title>
+    <access_arguments>administer CiviCRM</access_arguments>
+  </item>
+</menu>
