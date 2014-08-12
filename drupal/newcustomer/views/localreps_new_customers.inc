@@ -24,6 +24,7 @@ $handler->display->display_options['access']['role'] = array(
 );
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['distinct'] = TRUE;
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'full';
 $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -92,7 +93,7 @@ $handler->display->display_options['fields']['city']['label'] = 'City';
 $handler->display->display_options['fields']['city']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['city']['location_type'] = '0';
 $handler->display->display_options['fields']['city']['location_op'] = '0';
-$handler->display->display_options['fields']['city']['is_primary'] = 0;
+$handler->display->display_options['fields']['city']['is_primary'] = 1;
 $handler->display->display_options['fields']['city']['is_billing'] = 0;
 /* Field: CiviCRM Address: Country */
 $handler->display->display_options['fields']['country']['id'] = 'country';
