@@ -83,7 +83,7 @@ function newcustomer_prefill_local_rep($country_id) {
 function newcustomer_prefill_country_coordinator($country_id) {
   civicrm_initialize();
   
-  $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator', 'return' => 'id'));
+  $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator is', 'return' => 'id'));
   
   $country_cid = _newcustomer_country_id_to_contact_id($country_id);
   $cids['values'] = array();

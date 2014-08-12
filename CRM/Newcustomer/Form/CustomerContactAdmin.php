@@ -15,7 +15,7 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
     $this->add(
       'select', // field type
       'drupal_role', // field name
-      'Drupal role for new expert', // field label
+      'Drupal role for new customer contact', // field label
       $this->getDrupalRolesOptions(), // list of options
       true // is required
     );
@@ -81,8 +81,8 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
     $dao->is_active = 1;
     $dao->find(FALSE);
     while($dao->fetch()) {
-      $options['a_'.$dao->id] = $dao->label_a_b . '(a-b)';
-      $options['b_'.$dao->id] = $dao->label_b_a . '(b-a)';
+      $options['a_'.$dao->id] = $dao->label_a_b;
+      $options['b_'.$dao->id] = $dao->label_b_a;
     }
     asort($options);
     return $options;
