@@ -2,7 +2,6 @@
 
 $new_customer_tag_id = civicrm_api3('Tag', 'getvalue', array('return' => 'id', 'name' => 'New customer'));
 $local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
-$cc_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator is', 'return' => 'id'));
 
 $view = new view();
 $view->name = 'lr_s_new_customers';
@@ -51,19 +50,6 @@ $handler->display->display_options['relationships']['contact_id_b_']['field'] = 
 $handler->display->display_options['relationships']['contact_id_b_']['relationship'] = 'relationship_id_a';
 $handler->display->display_options['relationships']['contact_id_b_']['label'] = 'Local rep';
 $handler->display->display_options['relationships']['contact_id_b_']['required'] = TRUE;
-/* Relationship: CiviCRM Contacts: CiviCRM Relationship (starting from contact A) */
-$handler->display->display_options['relationships']['relationship_id_a_1']['id'] = 'relationship_id_a_1';
-$handler->display->display_options['relationships']['relationship_id_a_1']['table'] = 'civicrm_contact';
-$handler->display->display_options['relationships']['relationship_id_a_1']['field'] = 'relationship_id_a';
-$handler->display->display_options['relationships']['relationship_id_a_1']['relationship'] = 'contact_id_a_';
-$handler->display->display_options['relationships']['relationship_id_a_1']['label'] = 'Country coordinator relationship';
-$handler->display->display_options['relationships']['relationship_id_a_1']['relationship_type'] = $cc_rep_rel_type_id;
-/* Relationship: CiviCRM Relationships: Contact ID B */
-$handler->display->display_options['relationships']['contact_id_b__1']['id'] = 'contact_id_b__1';
-$handler->display->display_options['relationships']['contact_id_b__1']['table'] = 'civicrm_relationship';
-$handler->display->display_options['relationships']['contact_id_b__1']['field'] = 'contact_id_b_';
-$handler->display->display_options['relationships']['contact_id_b__1']['relationship'] = 'relationship_id_a_1';
-$handler->display->display_options['relationships']['contact_id_b__1']['label'] = 'Country Coordinator';
 /* Relationship: CiviCRM Contacts: Drupal ID */
 $handler->display->display_options['relationships']['drupal_id']['id'] = 'drupal_id';
 $handler->display->display_options['relationships']['drupal_id']['table'] = 'civicrm_contact';
@@ -125,14 +111,6 @@ $handler->display->display_options['fields']['email']['element_label_colon'] = F
 $handler->display->display_options['fields']['email']['location_type'] = '0';
 $handler->display->display_options['fields']['email']['location_op'] = '0';
 $handler->display->display_options['fields']['email']['is_primary'] = 0;
-/* Field: CiviCRM Contacts: Display Name */
-$handler->display->display_options['fields']['display_name_1']['id'] = 'display_name_1';
-$handler->display->display_options['fields']['display_name_1']['table'] = 'civicrm_contact';
-$handler->display->display_options['fields']['display_name_1']['field'] = 'display_name';
-$handler->display->display_options['fields']['display_name_1']['relationship'] = 'contact_id_b__1';
-$handler->display->display_options['fields']['display_name_1']['label'] = 'Country Coordinator';
-$handler->display->display_options['fields']['display_name_1']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['display_name_1']['link_to_civicrm_contact'] = 1;
 /* Filter criterion: CiviCRM Tags: Name */
 $handler->display->display_options['filters']['name']['id'] = 'name';
 $handler->display->display_options['filters']['name']['table'] = 'civicrm_tag';
