@@ -154,7 +154,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
     $pumCountryField = civicrm_api3('CustomField', 'getsingle', array('custom_group_id' => $pumCountry['id'], 'name' => 'civicrm_country_id'));
                                
     $this->_from .= " INNER JOIN {$pumCountry['table_name']} country_contact
-                        ON (country_contact.{$pumCountryField['column_name']} = {$this->_aliases['civicrm_contact']}.id)";
+                        ON (country_contact.{$pumCountryField['column_name']} = {$this->_aliases['civicrm_address']}.country_id)";
     
     $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator is', 'return' => 'id'));
     $currentUserContactId = $this->getCurrentUsersContactId();
@@ -312,6 +312,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
 
     $this->buildACLClause(array($this->_aliases['civicrm_contact']));
     $sql = $this->buildQuery();
+    
     $rows = array();
     $this->buildRows($sql, $rows);
 
