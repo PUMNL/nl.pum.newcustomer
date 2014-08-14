@@ -81,17 +81,16 @@ $handler->display->display_options['fields']['city']['location_type'] = '0';
 $handler->display->display_options['fields']['city']['location_op'] = '0';
 $handler->display->display_options['fields']['city']['is_primary'] = 1;
 $handler->display->display_options['fields']['city']['is_billing'] = 0;
-/* Field: CiviCRM Address: Country */
-$handler->display->display_options['fields']['country']['id'] = 'country';
-$handler->display->display_options['fields']['country']['table'] = 'civicrm_address';
-$handler->display->display_options['fields']['country']['field'] = 'country';
-$handler->display->display_options['fields']['country']['relationship'] = 'contact_id_a_';
-$handler->display->display_options['fields']['country']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['country']['location_type'] = '0';
-$handler->display->display_options['fields']['country']['location_op'] = '0';
-$handler->display->display_options['fields']['country']['is_primary'] = 1;
-$handler->display->display_options['fields']['country']['is_billing'] = 0;
-$handler->display->display_options['fields']['country']['country_display'] = '2';
+/* Field: CiviCRM Address: State / Province */
+$handler->display->display_options['fields']['state_province']['id'] = 'state_province';
+$handler->display->display_options['fields']['state_province']['table'] = 'civicrm_address';
+$handler->display->display_options['fields']['state_province']['field'] = 'state_province';
+$handler->display->display_options['fields']['state_province']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['state_province']['location_type'] = '0';
+$handler->display->display_options['fields']['state_province']['location_op'] = '0';
+$handler->display->display_options['fields']['state_province']['is_primary'] = 1;
+$handler->display->display_options['fields']['state_province']['is_billing'] = 0;
+$handler->display->display_options['fields']['state_province']['prov_display'] = '2';
 /* Field: CiviCRM Phone Details: Phone Number */
 $handler->display->display_options['fields']['phone']['id'] = 'phone';
 $handler->display->display_options['fields']['phone']['table'] = 'civicrm_phone';
