@@ -76,6 +76,7 @@ $handler->display->display_options['relationships']['drupal_id']['relationship']
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_contact';
 $handler->display->display_options['fields']['id']['field'] = 'id';
+$handler->display->display_options['fields']['id']['exclude'] = TRUE;
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
