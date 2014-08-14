@@ -7,9 +7,13 @@ function newcustomer_views_api() {
 function newcustomer_views_default_views() {
   $files = file_scan_directory(drupal_get_path('module', 'newcustomer'). '/views', '/.inc/');
   foreach ($files as $filepath => $file) {
-    require $filepath;
-    if (isset($view)) {
-      $views[$view->name] = $view;
+    try {
+      require $filepath;
+      if (isset($view)) {
+        $views[$view->name] = $view;
+      }
+    } catch (Exception $e) {
+      //do nothing
     }
   }
   return $views;
