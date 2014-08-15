@@ -26,7 +26,8 @@ $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'some';
 $handler->display->display_options['pager']['options']['items_per_page'] = '1';
-$handler->display->display_options['style_plugin'] = 'list';
+$handler->display->display_options['style_plugin'] = 'grid';
+$handler->display->display_options['style_options']['columns'] = '1';
 $handler->display->display_options['row_plugin'] = 'fields';
 /* Field: Global: Fieldset */
 $handler->display->display_options['fields']['fieldset']['id'] = 'fieldset';
@@ -206,6 +207,15 @@ $handler->display->display_options['fields']['view']['element_label_type'] = 'h2
 $handler->display->display_options['fields']['view']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['view']['view'] = 'authorised_contacts_for_customer';
 $handler->display->display_options['fields']['view']['arguments'] = '!1';
+/* Field: Global: View */
+$handler->display->display_options['fields']['view_1']['id'] = 'view_1';
+$handler->display->display_options['fields']['view_1']['table'] = 'views';
+$handler->display->display_options['fields']['view_1']['field'] = 'view';
+$handler->display->display_options['fields']['view_1']['label'] = 'Representative';
+$handler->display->display_options['fields']['view_1']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['view_1']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['view_1']['view'] = 'representatives_for_customer';
+$handler->display->display_options['fields']['view_1']['arguments'] = '!1';
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';
