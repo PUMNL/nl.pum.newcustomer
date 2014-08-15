@@ -3,6 +3,33 @@
 require_once 'newcustomer.civix.php';
 
 /**
+ * Implementation of hook_civicrm_aclWhereClause
+ * 
+ * Check if the current user is customer contact and retreive for every customer 
+ * 
+ * @param type $type
+ * @param type $tables
+ * @param type $whereTables
+ * @param type $contactID
+ * @param type $where
+ */
+function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$contactID, &$where) {
+  //select all customers for this contact
+  $config = CRM_Newcustomer_Config::singleton();
+  $auth_contact_rel_type_id = $config->getAuthorizedContactRelationshipTypeId();
+  if ($auth_contact_rel_type_id === false) {
+    return false;
+  }
+  
+  $auth_rel_table_name = 'auth_contact_relationship';
+  
+  $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id = '" . $auth_contact_rel_type_id . "' AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
+  $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
+  
+  return true;
+}
+
+/**
  * Create a drupal user account as soon as a customer contact relation is created
  * 
  */

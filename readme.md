@@ -6,7 +6,9 @@ The following functionality is provided:
 - Autofilling of country coordinator and local rep based on the country in a webform
 - Creation of a drupal user account as soon as a relationship is created
 - Civi report template for Country Coordinators to see their new customers
-- Drupal view for local reps to see their new customers
+- Drupal view for local reps and country coordinator to see their new customers
+- Drupal view with customer info
+- Permission check for 'has authorised' contacts only allowing contacts he/she is authorised for
 
 To enable the functionality you have to enable the *drupal* module and the *civicrm* extension
 
