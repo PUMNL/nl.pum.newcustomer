@@ -17,13 +17,23 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
   //select all customers for this contact
   $config = CRM_Newcustomer_Config::singleton();
   $auth_contact_rel_type_id = $config->getAuthorizedContactRelationshipTypeId();
-  if ($auth_contact_rel_type_id === false) {
+  $representative_rel_type_id = $config->getAuthorizedContactRelationshipTypeId();
+  $relationship_types = array();
+  
+  if ($auth_contact_rel_type_id !== false) {
+    $relationship_types[] = $auth_contact_rel_type_id;
+  }
+  if ($representative_rel_type_id !== false) {
+    $relationship_types[] = $representative_rel_type_id;
+  }
+  
+  if (count($relationship_types) == 0) {
     return false;
   }
   
-  $auth_rel_table_name = 'auth_contact_relationship';
+  $auth_rel_table_name = 'customer_relationship';
   
-  $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id = '" . $auth_contact_rel_type_id . "' AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
+  $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
   $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
   
   return true;

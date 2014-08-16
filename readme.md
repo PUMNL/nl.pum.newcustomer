@@ -9,6 +9,7 @@ The following functionality is provided:
 - Drupal view for local reps and country coordinator to see their new customers
 - Drupal view with customer info
 - Permission check for 'has authorised' contacts only allowing contacts he/she is authorised for
+- Permission check for 'representatives' only allowing contacts he/she is a representative for
 
 To enable the functionality you have to enable the *drupal* module and the *civicrm* extension
 
