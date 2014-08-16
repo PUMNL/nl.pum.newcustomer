@@ -27,19 +27,16 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
     $relationship_types[] = $representative_rel_type_id;
   }
   
-  if ($contactID > 0 && count($relationship_types) > 0) {
-    //user is logged in
-    //access to its customers when contact is a local rep
-    //or access to its customers when contact is an authorised for
-    $auth_rel_table_name = 'customer_relationship';
+  if (count($relationship_types) == 0) {
+    return false;
+  }
   
-    $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
-    $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
+  $auth_rel_table_name = 'customer_relationship';
   
-    return true;
-  } 
+  $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
+  $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
   
-  return false;;
+  return true;
 }
 
 /**
