@@ -17,7 +17,7 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
   //select all customers for this contact
   $config = CRM_Newcustomer_Config::singleton();
   $auth_contact_rel_type_id = $config->getAuthorizedContactRelationshipTypeId();
-  $representative_rel_type_id = $config->getAuthorizedContactRelationshipTypeId();
+  $representative_rel_type_id = $config->getRepresepentativeRelationshipTypeId();
   $relationship_types = array();
   
   if ($auth_contact_rel_type_id !== false) {
