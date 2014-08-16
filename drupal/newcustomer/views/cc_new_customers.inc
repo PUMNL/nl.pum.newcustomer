@@ -1,7 +1,7 @@
 <?php
 
 $new_customer_tag_id = civicrm_api3('Tag', 'getvalue', array('return' => 'id', 'name' => 'New customer'));
-$local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
+$local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative is', 'return' => 'id'));
 $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator is', 'return' => 'id'));
 
 $view = new view();

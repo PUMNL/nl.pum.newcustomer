@@ -1,6 +1,6 @@
 <?php
 
-$local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
+$local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative is', 'return' => 'id'));
 
 $view = new view();
 $view->name = 'representatives_for_customer';

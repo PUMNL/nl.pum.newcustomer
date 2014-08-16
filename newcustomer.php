@@ -27,16 +27,28 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
     $relationship_types[] = $representative_rel_type_id;
   }
   
-  if (count($relationship_types) == 0) {
-    return false;
+  if ($contactID > 0 && count($relationship_types) > 0) {
+    //user is logged in
+    //access to its customers when contact is a local rep
+    //or access to its customers when contact is an authorised for
+    $auth_rel_table_name = 'customer_relationship';
+  
+    $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
+    $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
+  
+    return true;
+  } else if ($contactID === 0 && $representative_rel_type_id) {
+    //make sure the anonymous user can fetch a list of represntatives. This is needed
+    //when a new customer register itself, the new customer has to select which 
+    //local representative they want. This hook is called for anonymous users when contactId = 0
+    $rep_rel_table_name = 'customer_relationship';
+  
+    $tables[$rep_rel_table_name] = $whereTables[$rep_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$rep_rel_table_name}` ON contact_a.id = {$rep_rel_table_name}.contact_id_a AND {$rep_rel_table_name}.relationship_type_id IN = '".$representative_rel_type_id."' AND `{$rep_rel_table_name}`.`is_active` = '1' AND (`{$rep_rel_table_name}`.`start_date` <= CURDATE() OR `{$rep_rel_table_name}`.`start_date` IS NULL) AND (`{$rep_rel_table_name}`.`end_date` >= CURDATE() OR `{$rep_rel_table_name}`.`end_date` IS NULL)";
+    $where .= ""; //empty where clause
+    return true;
   }
   
-  $auth_rel_table_name = 'customer_relationship';
-  
-  $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
-  $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
-  
-  return true;
+  return false;;
 }
 
 /**

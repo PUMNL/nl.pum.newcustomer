@@ -25,7 +25,7 @@ class CRM_Newcustomer_Config {
     }
     
     $this->auth_for_relationship = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Has authorised'));
-    $this->representative_relationship = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Representative'));
+    $this->representative_relationship = civicrm_api3('RelationshipType', 'getsingle', array('name_a_b' => 'Representative is'));
   }
   
   public static function singleton() {

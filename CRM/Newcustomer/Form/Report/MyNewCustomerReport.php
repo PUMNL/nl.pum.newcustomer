@@ -135,6 +135,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
   }
 
   function from() {
+    $config = CRM_Newcustomer_Config::singleton();
     $contact_side = 'contact_id_a';
     if ($this->_params['user_side_value'] == 2) {
       $contact_side = 'contact_id_b';
@@ -176,7 +177,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
     }
 
     if ($this->_localRepField) {
-      $local_rep_relation_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Representative', 'return' => 'id'));
+      $local_rep_relation_type_id = $config->getRepresepentativeRelationshipTypeId();
       $this->_from .= " LEFT JOIN civicrm_relationship {$this->_aliases['civicrm_relationship_local_rep']} ON (
         {$this->_aliases['civicrm_relationship_local_rep']}.relationship_type_id = '{$local_rep_relation_type_id}'
                 AND {$this->_aliases['civicrm_relationship_local_rep']}.contact_id_a = {$this->_aliases['civicrm_contact']}.id
