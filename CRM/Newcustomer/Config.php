@@ -12,7 +12,7 @@ class CRM_Newcustomer_Config {
   
   private $representative_relationship;
   
-  private function __construct() {
+  private function __construct() {    
     $this->relationship_types = unserialize(CRM_Core_BAO_Setting::getItem('nl.pum.newcustomer', 'new_customer_relationship_types'));
     if (!is_array($this->relationship_types)) {
       $this->relationship_types = array();

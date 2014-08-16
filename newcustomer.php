@@ -37,16 +37,7 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
     $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
   
     return true;
-  } else if ($contactID === 0 && $representative_rel_type_id) {
-    //make sure the anonymous user can fetch a list of represntatives. This is needed
-    //when a new customer register itself, the new customer has to select which 
-    //local representative they want. This hook is called for anonymous users when contactId = 0
-    $rep_rel_table_name = 'customer_relationship';
-  
-    $tables[$rep_rel_table_name] = $whereTables[$rep_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$rep_rel_table_name}` ON contact_a.id = {$rep_rel_table_name}.contact_id_a AND {$rep_rel_table_name}.relationship_type_id IN = '".$representative_rel_type_id."' AND `{$rep_rel_table_name}`.`is_active` = '1' AND (`{$rep_rel_table_name}`.`start_date` <= CURDATE() OR `{$rep_rel_table_name}`.`start_date` IS NULL) AND (`{$rep_rel_table_name}`.`end_date` >= CURDATE() OR `{$rep_rel_table_name}`.`end_date` IS NULL)";
-    $where .= ""; //empty where clause
-    return true;
-  }
+  } 
   
   return false;;
 }
