@@ -117,14 +117,6 @@ $handler->display->display_options['fields']['email']['field'] = 'email';
 $handler->display->display_options['fields']['email']['location_type'] = '0';
 $handler->display->display_options['fields']['email']['location_op'] = '0';
 $handler->display->display_options['fields']['email']['is_primary'] = 1;
-/* Field: CiviCRM Contacts: Text Link */
-$handler->display->display_options['fields']['text_link']['id'] = 'text_link';
-$handler->display->display_options['fields']['text_link']['table'] = 'civicrm_contact';
-$handler->display->display_options['fields']['text_link']['field'] = 'text_link';
-$handler->display->display_options['fields']['text_link']['label'] = '';
-$handler->display->display_options['fields']['text_link']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['text_link']['hide_empty'] = TRUE;
-$handler->display->display_options['fields']['text_link']['link_text'] = 'View in CiviCRM';
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';
