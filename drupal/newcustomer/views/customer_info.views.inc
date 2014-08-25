@@ -19,6 +19,7 @@ $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = array(
   8 => '8',
+  4 => '4',
   6 => '6',
 );
 $handler->display->display_options['cache']['type'] = 'none';
