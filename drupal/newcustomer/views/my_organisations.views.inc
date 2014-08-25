@@ -61,6 +61,16 @@ $handler->display->display_options['fields']['display_name']['alter']['make_link
 $handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer/[id]';
 $handler->display->display_options['fields']['display_name']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = '';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Edit organisation profile';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'customer/profile/[id]';
+$handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
