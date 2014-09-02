@@ -52,7 +52,8 @@ class CRM_Newcustomer_UserRole {
     $role_name = $roles[$role_id];
     $user_roles = $user->roles;
     $user_roles[$role_id] = $role_name;
-    user_save($user, array('roles' => $user_roles));
+    
+    user_save($user, array('roles' => $user_roles, 'status' => 1));
   }
   
   protected function createDrupalUser($contact_id) {
