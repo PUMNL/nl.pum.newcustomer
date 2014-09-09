@@ -7,19 +7,17 @@ $view->name = 'my_organisations';
 $view->description = '';
 $view->tag = 'default';
 $view->base_table = 'civicrm_contact';
-$view->human_name = 'My organisations';
+$view->human_name = 'My organization(s)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'My organisations';
+$handler->display->display_options['title'] = 'My organization(s)';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = array(
-  4 => '4',
-);
+$handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
