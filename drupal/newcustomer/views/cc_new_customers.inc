@@ -19,9 +19,7 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'New customers';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = array(
-  8 => '8',
-);
+$handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Country Coordinator'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['query']['options']['distinct'] = TRUE;

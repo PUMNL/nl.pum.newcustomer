@@ -2,6 +2,19 @@
 
 require_once 'newcustomer.civix.php';
 
+function newcustomer_get_role_ids($roles) {
+  $rids = array();
+  $available_roles = user_roles();
+  foreach($roles as $role) {
+    $rid = array_search($role, $available_roles);
+    if ($rid !== false) {
+      $rids[$rid] = $rid;
+    }
+  }
+  
+  return $rids;
+}
+
 /**
  * Implementation of hook_civicrm_aclWhereClause
  * 

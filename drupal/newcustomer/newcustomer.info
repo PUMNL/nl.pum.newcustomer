@@ -8,4 +8,5 @@ dependencies[] = webform (>=4.0-beta1)
 dependencies[] = views
 dependencies[] = views_field_view
 dependencies[] = views_fieldsets
+dependencies[] = views_merge_rows
 dependencies[] = pum_civicrm_views

@@ -18,9 +18,7 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'New customers';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = array(
-  6 => '6',
-);
+$handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -131,6 +129,33 @@ $handler->display->display_options['filters']['uid_current']['value'] = '1';
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['merge_rows'] = TRUE;
+$handler->display->display_options['field_config'] = array(
+  'id' => array(
+    'merge_option' => 'filter',
+    'separator' => ', ',
+  ),
+  'display_name' => array(
+    'merge_option' => 'filter',
+    'separator' => ', ',
+  ),
+  'city' => array(
+    'merge_option' => 'filter',
+    'separator' => ', ',
+  ),
+  'state_province' => array(
+    'merge_option' => 'filter',
+    'separator' => ', ',
+  ),
+  'phone' => array(
+    'merge_option' => 'merge',
+    'separator' => ', ',
+  ),
+  'email' => array(
+    'merge_option' => 'merge',
+    'separator' => ', ',
+  ),
+);
 $handler->display->display_options['path'] = 'representative/new-customers';
 $handler->display->display_options['menu']['type'] = 'normal';
 $handler->display->display_options['menu']['title'] = 'New customers';
