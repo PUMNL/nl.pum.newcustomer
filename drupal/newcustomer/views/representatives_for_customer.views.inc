@@ -4,8 +4,8 @@ $local_rep_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('nam
 
 $view = new view();
 $view->name = 'representatives_for_customer';
-$view->description = '';
-$view->tag = 'default';
+$view->description = 'Shows a list of representatives for a customer. This view is used in the customer info view';
+$view->tag = 'newcustomer';
 $view->base_table = 'civicrm_contact';
 $view->human_name = 'Representatives for customer';
 $view->core = 7;

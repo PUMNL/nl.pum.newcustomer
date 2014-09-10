@@ -5,7 +5,7 @@ $postal_loc_type_id = civicrm_api3('LocationType', 'getvalue', array('return' =>
 $view = new view();
 $view->name = 'customer_info';
 $view->description = 'This view is used to show customer info in drupal. ';
-$view->tag = 'default';
+$view->tag = 'newcustomer';
 $view->base_table = 'civicrm_contact';
 $view->human_name = 'Customer info';
 $view->core = 7;

@@ -5,16 +5,16 @@ $authorised_contact_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', a
 $view = new view();
 $view->name = 'my_organisations';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'newcustomer';
 $view->base_table = 'civicrm_contact';
-$view->human_name = 'My organization(s)';
+$view->human_name = 'My organisation(s) (for customer contact)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'My organization(s)';
+$handler->display->display_options['title'] = 'My organisation(s)';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer'));
@@ -82,6 +82,6 @@ $handler->display->display_options['path'] = 'customer/my-organisations';
 $handler->display->display_options['menu']['type'] = 'normal';
 $handler->display->display_options['menu']['title'] = 'My organisations';
 $handler->display->display_options['menu']['weight'] = '0';
-$handler->display->display_options['menu']['name'] = 'menu-webforms';
+$handler->display->display_options['menu']['name'] = 'navigation';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
