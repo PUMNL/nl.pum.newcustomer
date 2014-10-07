@@ -45,8 +45,9 @@ $handler->display->display_options['fields']['fieldset']['children'] = array(
   0 => 'display_name',
   1 => 'email',
   2 => 'phone',
-  3 => 'fieldset_1',
-  4 => 'fieldset_2',
+  3 => 'view_2',
+  4 => 'fieldset_1',
+  5 => 'fieldset_2',
 );
 $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Contacts: Contact ID */

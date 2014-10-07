@@ -3,7 +3,7 @@
 $view = new view();
 $view->name = 'contacts_websites';
 $view->description = 'Websites of a civicrm contact';
-$view->tag = 'default';
+$view->tag = 'customer info';
 $view->base_table = 'civicrm_contact';
 $view->human_name = 'Contacts Websites';
 $view->core = 7;
