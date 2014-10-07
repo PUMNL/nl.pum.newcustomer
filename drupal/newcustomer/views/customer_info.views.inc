@@ -17,7 +17,7 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Customer';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer', 'Customer (contact)', 'Representative', 'Country Coordinator'));
+$handler->display->display_options['access']['role'] = newcustomer_get_role_ids(array( 'Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -39,6 +39,14 @@ $handler->display->display_options['fields']['fieldset']['children'] = array(
   4 => 'fieldset_2',
 );
 $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
+/* Field: CiviCRM Contacts: Contact ID */
+$handler->display->display_options['fields']['id']['id'] = 'id';
+$handler->display->display_options['fields']['id']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['id']['field'] = 'id';
+$handler->display->display_options['fields']['id']['label'] = '';
+$handler->display->display_options['fields']['id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['id']['separator'] = '';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
@@ -231,5 +239,25 @@ $handler->display->display_options['filters']['contact_sub_type']['value'] = arr
 );
 
 /* Display: Customer */
-$handler = $view->new_display('page', 'Customer', 'page');
-$handler->display->display_options['path'] = 'customer';
+$handler1 = $view->new_display('page', 'Customer', 'page');
+$handler1->display->display_options['path'] = 'customer';
+
+/* Display: Customer for customer */
+$handler2 = $view->new_display('page', 'Customer for customer', 'page_1');
+$handler2->display->display_options['defaults']['access'] = FALSE;
+$handler2->display->display_options['access']['type'] = 'role';
+$handler2->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer', 'Customer (contact)'));
+$handler2->display->display_options['defaults']['fields'] = FALSE;
+$handler2->display->display_options['fields'] = $handler->display->display_options['fields'];
+/* Field: Global: Custom text */
+$handler2->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler2->display->display_options['fields']['nothing']['table'] = 'views';
+$handler2->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler2->display->display_options['fields']['nothing']['label'] = '';
+$handler2->display->display_options['fields']['nothing']['alter']['text'] = 'Edit organisation profile';
+$handler2->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler2->display->display_options['fields']['nothing']['alter']['path'] = 'customer/profile/?cid1=[id]';
+$handler2->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
+$handler2->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+
+$handler2->display->display_options['path'] = 'customer';
