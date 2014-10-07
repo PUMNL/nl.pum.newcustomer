@@ -1,5 +1,15 @@
 <?php
 
+$customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
+$model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$when_where_sold = civicrm_api3('CustomField', 'getvalue', array('name' => 'Where_and_how_are_the_products_of_services_sold', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+
+$aware = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_your_company_aware_of_any_business_support_provided_by_the_fo', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$worked_with = civicrm_api3('CustomField', 'getvalue', array('name' => 'Has_your_company_ever_worked_with_any_of_these_organisations_che', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$activily_make = civicrm_api3('CustomField', 'getvalue', array('name' => 'Does_your_company_actively_make_use_of_the_business_support_prov', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+$member_of = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_your_company_member_of_any_of_the_above_mentrioned_type_of_su', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
+
 $postal_loc_type_id = civicrm_api3('LocationType', 'getvalue', array('return' => 'id', 'name' => 'Postaladdress'));
 
 $view = new view();
@@ -70,6 +80,15 @@ $handler->display->display_options['fields']['phone']['location_type'] = '0';
 $handler->display->display_options['fields']['phone']['location_op'] = '0';
 $handler->display->display_options['fields']['phone']['is_primary'] = 0;
 $handler->display->display_options['fields']['phone']['phone_type'] = '0';
+/* Field: Global: View */
+$handler->display->display_options['fields']['view_2']['id'] = 'view_2';
+$handler->display->display_options['fields']['view_2']['table'] = 'views';
+$handler->display->display_options['fields']['view_2']['field'] = 'view';
+$handler->display->display_options['fields']['view_2']['label'] = '';
+$handler->display->display_options['fields']['view_2']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['view_2']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['view_2']['view'] = 'contacts_websites';
+$handler->display->display_options['fields']['view_2']['arguments'] = '!1';
 /* Field: Global: Fieldset */
 $handler->display->display_options['fields']['fieldset_1']['id'] = 'fieldset_1';
 $handler->display->display_options['fields']['fieldset_1']['table'] = 'views';
@@ -203,6 +222,64 @@ $handler->display->display_options['fields']['country_1']['location_op'] = '0';
 $handler->display->display_options['fields']['country_1']['is_primary'] = 0;
 $handler->display->display_options['fields']['country_1']['is_billing'] = 0;
 $handler->display->display_options['fields']['country_1']['country_display'] = '2';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_3']['id'] = 'fieldset_3';
+$handler->display->display_options['fields']['fieldset_3']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_3']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_3']['label'] = 'Main product/services';
+$handler->display->display_options['fields']['fieldset_3']['children'] = array(
+  0 => 'what_is_the_operational_model_of_513',
+  1 => 'products_and_or_services_offered_86',
+  2 => 'where_and_how_are_the_products_o_89',
+);
+/* Field: CiviCRM Custom: Customer Data: What is the operational model of the organisation */
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['id'] = 'what_is_the_operational_model_of_513';
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['field'] = $model;
+$handler->display->display_options['fields']['what_is_the_operational_model_of_513']['element_label_type'] = 'p';
+/* Field: CiviCRM Custom: Customer Data: Products and/or Services offered */
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['id'] = 'products_and_or_services_offered_86';
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['field'] = $services;
+$handler->display->display_options['fields']['products_and_or_services_offered_86']['element_label_type'] = 'p';
+/* Field: CiviCRM Custom: Customer Data: Where and how are the products or services sold */
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['id'] = 'where_and_how_are_the_products_o_89';
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['field'] = $when_where_sold;
+$handler->display->display_options['fields']['where_and_how_are_the_products_o_89']['element_label_type'] = 'p';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_4']['id'] = 'fieldset_4';
+$handler->display->display_options['fields']['fieldset_4']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_4']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_4']['label'] = 'Business Support available for your company';
+$handler->display->display_options['fields']['fieldset_4']['children'] = array(
+  0 => 'is_your_company_aware_of_any_bus_514',
+  1 => 'has_your_company_ever_worked_wit_515',
+  2 => 'does_your_company_actively_make__516',
+  3 => 'is_your_company_member_of_any_of_517',
+);
+/* Field: CiviCRM Custom: Customer Data: Is your company aware of any business support provided by the following type of organisations?  (check box if yes) */
+$handler->display->display_options['fields']['is_your_company_aware_of_any_bus_514']['id'] = 'is_your_company_aware_of_any_bus_514';
+$handler->display->display_options['fields']['is_your_company_aware_of_any_bus_514']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['is_your_company_aware_of_any_bus_514']['field'] = $aware;
+$handler->display->display_options['fields']['is_your_company_aware_of_any_bus_514']['element_label_type'] = 'p';
+/* Field: CiviCRM Custom: Customer Data: Has your company ever worked with any of these organisations?  (check box if yes) */
+$handler->display->display_options['fields']['has_your_company_ever_worked_wit_515']['id'] = 'has_your_company_ever_worked_wit_515';
+$handler->display->display_options['fields']['has_your_company_ever_worked_wit_515']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['has_your_company_ever_worked_wit_515']['field'] = $worked_with;
+$handler->display->display_options['fields']['has_your_company_ever_worked_wit_515']['element_label_type'] = 'p';
+/* Field: CiviCRM Custom: Customer Data: Does your company actively make use of the business support provided by these organisations? (check box if yes) */
+$handler->display->display_options['fields']['does_your_company_actively_make__516']['id'] = 'does_your_company_actively_make__516';
+$handler->display->display_options['fields']['does_your_company_actively_make__516']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['does_your_company_actively_make__516']['field'] = $activily_make;
+$handler->display->display_options['fields']['does_your_company_actively_make__516']['element_label_type'] = 'p';
+/* Field: CiviCRM Custom: Customer Data: Is your company member of any of the above mentrioned type of support organisation for which membership is not voluntary? */
+$handler->display->display_options['fields']['is_your_company_member_of_any_of_517']['id'] = 'is_your_company_member_of_any_of_517';
+$handler->display->display_options['fields']['is_your_company_member_of_any_of_517']['table'] = $customer_data['table_name'];
+$handler->display->display_options['fields']['is_your_company_member_of_any_of_517']['field'] = $member_of;
+$handler->display->display_options['fields']['is_your_company_member_of_any_of_517']['element_label_type'] = 'p';
+
+
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
