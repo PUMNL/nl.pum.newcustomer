@@ -34,7 +34,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
           '_rel_type_id' => array(
             'title' => ts('My relationship to country'),
             'operatorType' => CRM_Report_Form::OP_SELECT,
-            'options' => CRM_Contact_BAO_Relationship::getContactRelationshipType(NULL, 'null', NULL, NULL, FALSE),
+            'options' => CRM_Contact_BAO_Relationship::getContactRelationshipType(NULL, 'null', NULL, NULL, TRUE),
             'type' => CRM_Utils_Type::T_INT,
           ),
         )
@@ -166,6 +166,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
                         ON (country_contact.{$pumCountryField['column_name']} = {$this->_aliases['civicrm_address']}.country_id)";
     
     $_rel_type_id = str_replace("_a_b", "" , $this->_params['_rel_type_id_value']);
+    $_rel_type_id = str_replace("_b_a", "" , $_rel_type_id);
     $currentUserContactId = $this->getCurrentUsersContactId();
     $this->_from .= " INNER JOIN civicrm_relationship cc_relationship
                       ON (cc_relationship.relationship_type_id = {$_rel_type_id}
