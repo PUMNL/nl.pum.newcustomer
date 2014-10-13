@@ -30,6 +30,14 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
           ),
         ),
         'grouping' => 'conact_fields',
+        'filters' => array(
+          '_rel_type_id' => array(
+            'title' => ts('My relationship to country'),
+            'operatorType' => CRM_Report_Form::OP_SELECT,
+            'options' => CRM_Contact_BAO_Relationship::getContactRelationshipType(NULL, 'null', NULL, NULL, FALSE),
+            'type' => CRM_Utils_Type::T_INT,
+          ),
+        )
       ),
       'civicrm_contact_local_rep' =>
       array(
@@ -157,10 +165,10 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
     $this->_from .= " INNER JOIN {$pumCountry['table_name']} country_contact
                         ON (country_contact.{$pumCountryField['column_name']} = {$this->_aliases['civicrm_address']}.country_id)";
     
-    $cc_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Country Coordinator is', 'return' => 'id'));
+    $_rel_type_id = str_replace("_a_b", "" , $this->_params['_rel_type_id_value']);
     $currentUserContactId = $this->getCurrentUsersContactId();
     $this->_from .= " INNER JOIN civicrm_relationship cc_relationship
-                      ON (cc_relationship.relationship_type_id = {$cc_rel_type_id}
+                      ON (cc_relationship.relationship_type_id = {$_rel_type_id}
                       AND cc_relationship.is_active = 1
                       AND (cc_relationship.start_date IS NULL OR cc_relationship.start_date <= CURDATE())
                       AND (cc_relationship.end_date IS NULL OR cc_relationship.end_date >= CURDATE())
@@ -206,7 +214,10 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
     foreach ($this->_columns as $tableName => $table) {
       if (array_key_exists('filters', $table)) {
         foreach ($table['filters'] as $fieldName => $field) {
-
+          if ($tableName == 'civicrm_contact' && $fieldName == '_rel_type_id') {
+            //ignore this field
+            continue;
+          }
           $clause = NULL;
           if (CRM_Utils_Array::value('type', $field) & CRM_Utils_Type::T_DATE) {
             $relative = CRM_Utils_Array::value("{$fieldName}_relative", $this->_params);
