@@ -168,14 +168,15 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
     $_rel_type_id = str_replace("_a_b", "" , $this->_params['_rel_type_id_value']);
     $_rel_type_id = str_replace("_b_a", "" , $_rel_type_id);
     $currentUserContactId = $this->getCurrentUsersContactId();
-    $this->_from .= " INNER JOIN civicrm_relationship cc_relationship
+    if (!empty($_rel_type_id)) {
+      $this->_from .= " INNER JOIN civicrm_relationship cc_relationship
                       ON (cc_relationship.relationship_type_id = {$_rel_type_id}
                       AND cc_relationship.is_active = 1
                       AND (cc_relationship.start_date IS NULL OR cc_relationship.start_date <= CURDATE())
                       AND (cc_relationship.end_date IS NULL OR cc_relationship.end_date >= CURDATE())
                       AND cc_relationship.contact_id_a = country_contact.entity_id
                       AND cc_relationship.contact_id_b = '{$currentUserContactId}')";
-    
+    }
     // include Email Field
     if ($this->_emailField) {
       $this->_from .= "
