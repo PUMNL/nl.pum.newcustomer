@@ -43,11 +43,12 @@ $fields['fieldset']['field'] = 'fieldset';
 $fields['fieldset']['label'] = 'General info';
 $fields['fieldset']['children'] = array(
   0 => 'display_name',
-  1 => 'email',
-  2 => 'phone',
-  3 => 'view_2',
-  4 => 'fieldset_1',
-  5 => 'fieldset_2',
+  1 => 'edit_link_1',
+  2 => 'email',
+  3 => 'phone',
+  4 => 'view_2',
+  5 => 'fieldset_1',
+  6 => 'fieldset_2',
 );
 $fields['fieldset']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Contacts: Contact ID */
