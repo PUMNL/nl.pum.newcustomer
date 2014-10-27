@@ -340,8 +340,8 @@ $handler->display->display_options['filters']['contact_sub_type']['value'] = arr
 /* Display: Customer */
 $handler1 = $view->new_display('page', 'Customer', 'page');
 $handler1->display->display_options['fields'] = $fields;
-unsert($handler1->display->display_options['fields']['edit_link_1']);
-unsert($handler1->display->display_options['fields']['edit_link_2']);
+unset($handler1->display->display_options['fields']['edit_link_1']);
+unset($handler1->display->display_options['fields']['edit_link_2']);
 $handler1->display->display_options['path'] = 'customer';
 
 /* Display: Customer for customer */
