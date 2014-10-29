@@ -45,10 +45,11 @@ $fields['fieldset']['children'] = array(
   0 => 'display_name',
   1 => 'edit_link_1',
   2 => 'email',
-  3 => 'phone',
-  4 => 'view_2',
-  5 => 'fieldset_1',
-  6 => 'fieldset_2',
+  3 => 'phone1',
+  4 => 'phone2',
+  5 => 'view_2',
+  6 => 'fieldset_1',
+  7 => 'fieldset_2',
 );
 $fields['fieldset']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Contacts: Contact ID */
