@@ -85,13 +85,23 @@ $fields['email']['location_type'] = '0';
 $fields['email']['location_op'] = '0';
 $fields['email']['is_primary'] = 0;
 /* Field: CiviCRM Phone Details: Phone Number */
-$fields['phone']['id'] = 'phone';
-$fields['phone']['table'] = 'civicrm_phone';
-$fields['phone']['field'] = 'phone';
-$fields['phone']['location_type'] = '0';
-$fields['phone']['location_op'] = '0';
-$fields['phone']['is_primary'] = 0;
-$fields['phone']['phone_type'] = '0';
+$fields['phone1']['id'] = 'phone1';
+$fields['phone1']['label'] = 'Phone 1';
+$fields['phone1']['table'] = 'civicrm_phone';
+$fields['phone1']['field'] = 'phone';
+$fields['phone1']['location_type'] = '0';
+$fields['phone1']['location_op'] = '0';
+$fields['phone1']['is_primary'] = 1;
+$fields['phone1']['phone_type'] = '0';
+/* Field: CiviCRM Phone Details: Phone Number */
+$fields['phone2']['id'] = 'phone2';
+$fields['phone2']['label'] = 'Phone 2 (Mobile)';
+$fields['phone2']['table'] = 'civicrm_phone';
+$fields['phone2']['field'] = 'phone';
+$fields['phone2']['location_type'] = '0';
+$fields['phone2']['location_op'] = '0';
+$fields['phone2']['is_primary'] = 0;
+$fields['phone2']['phone_type'] = '2';
 /* Field: Global: View */
 $fields['view_2']['id'] = 'view_2';
 $fields['view_2']['table'] = 'views';
@@ -143,17 +153,6 @@ $fields['postal_code']['location_type'] = '0';
 $fields['postal_code']['location_op'] = '0';
 $fields['postal_code']['is_primary'] = 1;
 $fields['postal_code']['is_billing'] = 0;
-/* Field: CiviCRM Address: State / Province */
-$fields['state_province']['id'] = 'state_province';
-$fields['state_province']['table'] = 'civicrm_address';
-$fields['state_province']['field'] = 'state_province';
-$fields['state_province']['label'] = '';
-$fields['state_province']['element_label_colon'] = FALSE;
-$fields['state_province']['location_type'] = '0';
-$fields['state_province']['location_op'] = '0';
-$fields['state_province']['is_primary'] = 1;
-$fields['state_province']['is_billing'] = 0;
-$fields['state_province']['prov_display'] = '2';
 /* Field: CiviCRM Address: Country */
 $fields['country']['id'] = 'country';
 $fields['country']['table'] = 'civicrm_address';
@@ -210,18 +209,6 @@ $fields['postal_code_1']['location_type'] = $postal_loc_type_id;
 $fields['postal_code_1']['location_op'] = '0';
 $fields['postal_code_1']['is_primary'] = 0;
 $fields['postal_code_1']['is_billing'] = 0;
-/* Field: CiviCRM Address: State / Province */
-$fields['state_province_1']['id'] = 'state_province_1';
-$fields['state_province_1']['table'] = 'civicrm_address';
-$fields['state_province_1']['field'] = 'state_province';
-$fields['state_province_1']['label'] = '';
-$fields['state_province_1']['element_label_colon'] = FALSE;
-$fields['state_province_1']['hide_empty'] = TRUE;
-$fields['state_province_1']['location_type'] = $postal_loc_type_id;
-$fields['state_province_1']['location_op'] = '0';
-$fields['state_province_1']['is_primary'] = 0;
-$fields['state_province_1']['is_billing'] = 0;
-$fields['state_province_1']['prov_display'] = '2';
 /* Field: CiviCRM Address: Country */
 $fields['country_1']['id'] = 'country_1';
 $fields['country_1']['table'] = 'civicrm_address';
@@ -234,64 +221,6 @@ $fields['country_1']['location_op'] = '0';
 $fields['country_1']['is_primary'] = 0;
 $fields['country_1']['is_billing'] = 0;
 $fields['country_1']['country_display'] = '2';
-/* Field: Global: Fieldset */
-$fields['fieldset_3']['id'] = 'fieldset_3';
-$fields['fieldset_3']['table'] = 'views';
-$fields['fieldset_3']['field'] = 'fieldset';
-$fields['fieldset_3']['label'] = 'Main product/services';
-$fields['fieldset_3']['children'] = array(
-  0 => 'what_is_the_operational_model_of_513',
-  1 => 'products_and_or_services_offered_86',
-  2 => 'where_and_how_are_the_products_o_89',
-);
-/* Field: CiviCRM Custom: Customer Data: What is the operational model of the organisation */
-$fields['what_is_the_operational_model_of_513']['id'] = 'what_is_the_operational_model_of_513';
-$fields['what_is_the_operational_model_of_513']['table'] = $customer_data['table_name'];
-$fields['what_is_the_operational_model_of_513']['field'] = $model;
-$fields['what_is_the_operational_model_of_513']['element_label_type'] = 'p';
-/* Field: CiviCRM Custom: Customer Data: Products and/or Services offered */
-$fields['products_and_or_services_offered_86']['id'] = 'products_and_or_services_offered_86';
-$fields['products_and_or_services_offered_86']['table'] = $customer_data['table_name'];
-$fields['products_and_or_services_offered_86']['field'] = $services;
-$fields['products_and_or_services_offered_86']['element_label_type'] = 'p';
-/* Field: CiviCRM Custom: Customer Data: Where and how are the products or services sold */
-$fields['where_and_how_are_the_products_o_89']['id'] = 'where_and_how_are_the_products_o_89';
-$fields['where_and_how_are_the_products_o_89']['table'] = $customer_data['table_name'];
-$fields['where_and_how_are_the_products_o_89']['field'] = $when_where_sold;
-$fields['where_and_how_are_the_products_o_89']['element_label_type'] = 'p';
-/* Field: Global: Fieldset */
-$fields['fieldset_4']['id'] = 'fieldset_4';
-$fields['fieldset_4']['table'] = 'views';
-$fields['fieldset_4']['field'] = 'fieldset';
-$fields['fieldset_4']['label'] = 'Business Support available for your company';
-$fields['fieldset_4']['children'] = array(
-  0 => 'is_your_company_aware_of_any_bus_514',
-  1 => 'has_your_company_ever_worked_wit_515',
-  2 => 'does_your_company_actively_make__516',
-  3 => 'is_your_company_member_of_any_of_517',
-);
-/* Field: CiviCRM Custom: Customer Data: Is your company aware of any business support provided by the following type of organisations?  (check box if yes) */
-$fields['is_your_company_aware_of_any_bus_514']['id'] = 'is_your_company_aware_of_any_bus_514';
-$fields['is_your_company_aware_of_any_bus_514']['table'] = $customer_data['table_name'];
-$fields['is_your_company_aware_of_any_bus_514']['field'] = $aware;
-$fields['is_your_company_aware_of_any_bus_514']['element_label_type'] = 'p';
-/* Field: CiviCRM Custom: Customer Data: Has your company ever worked with any of these organisations?  (check box if yes) */
-$fields['has_your_company_ever_worked_wit_515']['id'] = 'has_your_company_ever_worked_wit_515';
-$fields['has_your_company_ever_worked_wit_515']['table'] = $customer_data['table_name'];
-$fields['has_your_company_ever_worked_wit_515']['field'] = $worked_with;
-$fields['has_your_company_ever_worked_wit_515']['element_label_type'] = 'p';
-/* Field: CiviCRM Custom: Customer Data: Does your company actively make use of the business support provided by these organisations? (check box if yes) */
-$fields['does_your_company_actively_make__516']['id'] = 'does_your_company_actively_make__516';
-$fields['does_your_company_actively_make__516']['table'] = $customer_data['table_name'];
-$fields['does_your_company_actively_make__516']['field'] = $activily_make;
-$fields['does_your_company_actively_make__516']['element_label_type'] = 'p';
-/* Field: CiviCRM Custom: Customer Data: Is your company member of any of the above mentrioned type of support organisation for which membership is not voluntary? */
-$fields['is_your_company_member_of_any_of_517']['id'] = 'is_your_company_member_of_any_of_517';
-$fields['is_your_company_member_of_any_of_517']['table'] = $customer_data['table_name'];
-$fields['is_your_company_member_of_any_of_517']['field'] = $member_of;
-$fields['is_your_company_member_of_any_of_517']['element_label_type'] = 'p';
-
-
 /* Field: Global: View */
 $fields['view']['id'] = 'view';
 $fields['view']['table'] = 'views';
@@ -320,6 +249,8 @@ $fields['edit_link_2']['alter']['make_link'] = TRUE;
 $fields['edit_link_2']['alter']['path'] = 'customer/profile/?cid1=[id]';
 $fields['edit_link_2']['alter']['absolute'] = TRUE;
 $fields['edit_link_2']['element_label_colon'] = FALSE;
+
+$handler->display->display_options['fields'] = $fields;
 
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
