@@ -270,19 +270,20 @@ $handler->display->display_options['filters']['contact_sub_type']['value'] = arr
   'Customer' => 'Customer',
 );
 
-/* Display: Customer */
-$handler1 = $view->new_display('page', 'Customer', 'page');
+/* Display: Customer for customer */
+$handler1 = $view->new_display('page', 'Customer for customer', 'page_1');
+$handler1->display->display_options['defaults']['access'] = FALSE;
+$handler1->display->display_options['access']['type'] = 'role';
+$handler1->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer', 'Customer (contact)'));
+$handler1->display->display_options['defaults']['fields'] = FALSE;
 $handler1->display->display_options['fields'] = $fields;
-unset($handler1->display->display_options['fields']['edit_link_1']);
-unset($handler1->display->display_options['fields']['edit_link_2']);
 $handler1->display->display_options['path'] = 'customer';
 
-/* Display: Customer for customer */
-$handler2 = $view->new_display('page', 'Customer for customer', 'page_1');
-$handler2->display->display_options['defaults']['access'] = FALSE;
-$handler2->display->display_options['access']['type'] = 'role';
-$handler2->display->display_options['access']['role'] = newcustomer_get_role_ids(array('Customer', 'Customer (contact)'));
+/* Display: Customer */
+$handler2 = $view->new_display('page', 'Customer', 'page');
 $handler2->display->display_options['defaults']['fields'] = FALSE;
 $handler2->display->display_options['fields'] = $fields;
-
+unset($handler2->display->display_options['fields']['edit_link_1']);
+unset($handler2->display->display_options['fields']['edit_link_2']);
 $handler2->display->display_options['path'] = 'customer';
+
