@@ -1,15 +1,5 @@
 <?php
 
-$customer_data = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
-$model = civicrm_api3('CustomField', 'getvalue', array('name' => 'What_is_the_operational_model_of_the_organisation', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$services = civicrm_api3('CustomField', 'getvalue', array('name' => 'Products_and_or_Services_offered', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$when_where_sold = civicrm_api3('CustomField', 'getvalue', array('name' => 'Where_and_how_are_the_products_of_services_sold', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-
-$aware = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_your_company_aware_of_any_business_support_provided_by_the_fo', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$worked_with = civicrm_api3('CustomField', 'getvalue', array('name' => 'Has_your_company_ever_worked_with_any_of_these_organisations_che', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$activily_make = civicrm_api3('CustomField', 'getvalue', array('name' => 'Does_your_company_actively_make_use_of_the_business_support_prov', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-$member_of = civicrm_api3('CustomField', 'getvalue', array('name' => 'Is_your_company_member_of_any_of_the_above_mentrioned_type_of_su', 'return' => 'column_name', 'custom_group_id' => $customer_data['id']));
-
 $postal_loc_type_id = civicrm_api3('LocationType', 'getvalue', array('return' => 'id', 'name' => 'Postaladdress'));
 
 $view = new view();
