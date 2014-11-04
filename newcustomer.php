@@ -47,7 +47,14 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
   $auth_rel_table_name = 'customer_relationship';
   
   $tables[$auth_rel_table_name] = $whereTables[$auth_rel_table_name] = "LEFT JOIN `civicrm_relationship` `{$auth_rel_table_name}` ON contact_a.id = {$auth_rel_table_name}.contact_id_a AND {$auth_rel_table_name}.relationship_type_id IN (" . implode(",", $relationship_types) . ") AND `{$auth_rel_table_name}`.`is_active` = '1' AND (`{$auth_rel_table_name}`.`start_date` <= CURDATE() OR `{$auth_rel_table_name}`.`start_date` IS NULL) AND (`{$auth_rel_table_name}`.`end_date` >= CURDATE() OR `{$auth_rel_table_name}`.`end_date` IS NULL)";
-  $where .= " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
+  $clause = " ({$auth_rel_table_name}.contact_id_b = '" . $contactID . "')";
+  
+  if (!empty($where)) {
+    $where = "(".$where . " OR ".$clause.")";
+  } else {
+    $where = $clause;
+  }
+  
   
   return true;
 }
