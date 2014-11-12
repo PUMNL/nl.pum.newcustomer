@@ -26,6 +26,59 @@ $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'full';
 $handler->display->display_options['pager']['options']['items_per_page'] = '10';
 $handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'id' => 'id',
+  'modified_date' => 'modified_date',
+  'display_name' => 'display_name',
+  'city' => 'city',
+  'phone' => 'phone',
+  'email' => 'email',
+);
+$handler->display->display_options['style_options']['default'] = 'modified_date';
+$handler->display->display_options['style_options']['info'] = array(
+  'id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'modified_date' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'desc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'display_name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'city' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'phone' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'email' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
 /* Relationship: Local rep relationship */
 $handler->display->display_options['relationships']['relationship_id_a']['id'] = 'relationship_id_a';
 $handler->display->display_options['relationships']['relationship_id_a']['table'] = 'civicrm_contact';
@@ -62,6 +115,13 @@ $handler->display->display_options['fields']['id']['label'] = '';
 $handler->display->display_options['fields']['id']['exclude'] = TRUE;
 $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['id']['separator'] = '';
+/* Field: CiviCRM Contacts: Modified date */
+$handler->display->display_options['fields']['modified_date']['id'] = 'modified_date';
+$handler->display->display_options['fields']['modified_date']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['modified_date']['field'] = 'modified_date';
+$handler->display->display_options['fields']['modified_date']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['modified_date']['label'] = 'Date';
+$handler->display->display_options['fields']['modified_date']['date_format'] = 'short';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
