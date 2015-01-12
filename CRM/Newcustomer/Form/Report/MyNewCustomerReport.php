@@ -145,7 +145,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
   function from() {
     $config = CRM_Newcustomer_Config::singleton();
     $contact_side = 'contact_id_a';
-    if ($this->_params['user_side_value'] == 2) {
+    if (isset($this->_params['user_side_value']) && $this->_params['user_side_value'] == 2) {
       $contact_side = 'contact_id_b';
     }
     $this->_from = "
