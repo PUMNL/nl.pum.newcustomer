@@ -103,6 +103,10 @@ $handler->display->display_options['fields']['display_name']['table'] = 'civicrm
 $handler->display->display_options['fields']['display_name']['field'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['label'] = 'Name';
 $handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
+/* Field: CiviCRM Contacts: Job Title */
+$handler->display->display_options['fields']['job_title']['id'] = 'job_title';
+$handler->display->display_options['fields']['job_title']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['job_title']['field'] = 'job_title';
 /* Field: CiviCRM Phone Details: Phone Number */
 $handler->display->display_options['fields']['phone']['id'] = 'phone';
 $handler->display->display_options['fields']['phone']['table'] = 'civicrm_phone';

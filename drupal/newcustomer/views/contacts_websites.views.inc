@@ -37,7 +37,7 @@ $handler->display->display_options['fields']['url']['table'] = 'civicrm_website'
 $handler->display->display_options['fields']['url']['field'] = 'url';
 $handler->display->display_options['fields']['url']['label'] = '';
 $handler->display->display_options['fields']['url']['alter']['alter_text'] = TRUE;
-$handler->display->display_options['fields']['url']['alter']['text'] = '[website_type]: <a href="[url]">[url]</a>';
+$handler->display->display_options['fields']['url']['alter']['text'] = '<a href="[url]">[url]</a>';
 $handler->display->display_options['fields']['url']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['url']['hide_empty'] = TRUE;
 /* Contextual filter: CiviCRM Contacts: Contact ID */
