@@ -129,7 +129,7 @@ $handler->display->display_options['fields']['display_name']['field'] = 'display
 $handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id_a_';
 $handler->display->display_options['fields']['display_name']['label'] = 'Customer';
 $handler->display->display_options['fields']['display_name']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer/[id]';
+$handler->display->display_options['fields']['display_name']['alter']['path'] = 'customer-profile/[id]';
 $handler->display->display_options['fields']['display_name']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: CiviCRM Address: City / Suburb */
