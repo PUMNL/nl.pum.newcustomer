@@ -57,6 +57,11 @@ class CRM_Newcustomer_UserRole {
   }
   
   protected function createDrupalUser($contact_id) {
+    global $user;
+
+    //add permission temporarly to user
+    $old_uid = $user->uid = 1;
+
     $drupal_uid = $this->getDurpalUserId($contact_id);
     if ($drupal_uid !== false) {
       return $drupal_uid;
@@ -116,6 +121,7 @@ class CRM_Newcustomer_UserRole {
 
     if (form_get_errors()) {
       CRM_Core_Session::setStatus('No user account created', 'No user account created', 'error');
+      $user->uid = $old_uid;
       return FALSE;
     }
     $drupal_uid = $form_state['user']->uid;
@@ -129,7 +135,8 @@ class CRM_Newcustomer_UserRole {
     if (!$ufmatch->find(TRUE)) {
       $ufmatch->save();
     }
-    
+
+    $user->uid = $old_uid;
     return $drupal_uid;
   }
   

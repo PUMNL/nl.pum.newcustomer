@@ -51,7 +51,7 @@ function newcustomer_civicrm_aclWhereClause($type, &$tables, &$whereTables, &$co
  * 
  */
 function newcustomer_civicrm_post($op, $objectName, $objectId, &$objectRef) {
-  if ($objectName == 'Relationship' && ($op == 'edit' || $op == 'create')) {
+  if ($objectName == 'Relationship' && ($op == 'edit' || $op == 'create') && empty($objectRef->case_id)) {
     //create drupal user account    
     $user_account = new CRM_Newcustomer_UserRole($objectRef);
     //process checks if this is a valid relationship type
