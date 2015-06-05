@@ -210,7 +210,7 @@ $handler->display->display_options['path'] = 'representative/new-customers';
 $handler->display->display_options['menu']['type'] = 'normal';
 $handler->display->display_options['menu']['title'] = 'New customers';
 $handler->display->display_options['menu']['weight'] = '-2';
-$handler->display->display_options['menu']['name'] = 'navigation';
+$handler->display->display_options['menu']['name'] = 'menu-my-projects';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
 
