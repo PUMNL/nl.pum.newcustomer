@@ -60,7 +60,8 @@ class CRM_Newcustomer_UserRole {
     global $user;
 
     //add permission temporarly to user
-    $old_uid = $user->uid = 1;
+    $old_uid = $user->uid;
+    $user->uid = 1;
 
     $drupal_uid = $this->getDurpalUserId($contact_id);
     if ($drupal_uid !== false) {
