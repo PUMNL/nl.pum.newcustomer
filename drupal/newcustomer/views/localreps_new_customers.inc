@@ -121,7 +121,8 @@ $handler->display->display_options['fields']['modified_date']['table'] = 'civicr
 $handler->display->display_options['fields']['modified_date']['field'] = 'modified_date';
 $handler->display->display_options['fields']['modified_date']['relationship'] = 'contact_id_a_';
 $handler->display->display_options['fields']['modified_date']['label'] = 'Date';
-$handler->display->display_options['fields']['modified_date']['date_format'] = 'short';
+$handler->display->display_options['fields']['modified_date']['custom_date_format'] = 'd-m-Y';
+$handler->display->display_options['fields']['modified_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
