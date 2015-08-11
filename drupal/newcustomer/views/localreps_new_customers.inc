@@ -121,8 +121,8 @@ $handler->display->display_options['fields']['modified_date']['table'] = 'civicr
 $handler->display->display_options['fields']['modified_date']['field'] = 'modified_date';
 $handler->display->display_options['fields']['modified_date']['relationship'] = 'contact_id_a_';
 $handler->display->display_options['fields']['modified_date']['label'] = 'Date';
-$handler->display->display_options['fields']['modified_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['modified_date']['custom_date_format'] = 'j F Y';
+$handler->display->display_options['fields']['modified_date']['date_format'] = 'short';
+
 $handler->display->display_options['fields']['modified_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
@@ -153,7 +153,7 @@ $handler->display->display_options['fields']['phone']['relationship'] = 'contact
 $handler->display->display_options['fields']['phone']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['phone']['location_type'] = '0';
 $handler->display->display_options['fields']['phone']['location_op'] = '0';
-$handler->display->display_options['fields']['phone']['is_primary'] = 0;
+$handler->display->display_options['fields']['phone']['is_primary'] = 1;
 $handler->display->display_options['fields']['phone']['phone_type'] = '0';
 /* Field: CiviCRM Email: Email Address */
 $handler->display->display_options['fields']['email']['id'] = 'email';
@@ -283,7 +283,7 @@ $handler->display->display_options['fields']['phone']['exclude'] = TRUE;
 $handler->display->display_options['fields']['phone']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['phone']['location_type'] = '0';
 $handler->display->display_options['fields']['phone']['location_op'] = '0';
-$handler->display->display_options['fields']['phone']['is_primary'] = 0;
+$handler->display->display_options['fields']['phone']['is_primary'] = 1;
 $handler->display->display_options['fields']['phone']['phone_type'] = '0';
 /* Field: CiviCRM Email: Email Address */
 $handler->display->display_options['fields']['email']['id'] = 'email';
