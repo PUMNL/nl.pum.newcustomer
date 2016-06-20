@@ -30,7 +30,7 @@ class CRM_Newcustomer_UserRole {
       $drupal_uid = $this->createDrupalUser($cid);
       if ($drupal_uid) {
         //assign role to drupal user
-        $this->assignRoleToUser($drupal_uid, $config->getDrupalRole());
+        //$this->assignRoleToUser($drupal_uid, $config->getDrupalRole());
         //set the message
         try {
           $contact = civicrm_api3('Contact', 'getsingle', array('id' => $cid));
@@ -59,14 +59,14 @@ class CRM_Newcustomer_UserRole {
   protected function createDrupalUser($contact_id) {
     global $user;
 
-    //add permission temporarly to user
-    $old_uid = $user->uid;
-    $user->uid = 1;
-
     $drupal_uid = $this->getDurpalUserId($contact_id);
     if ($drupal_uid !== false) {
       return $drupal_uid;
     }
+
+    //add permission temporarly to user
+    $old_uid = $user->uid;
+    $user->uid = 1;
     
     //create user in drupal
     //user the form api to create the user
