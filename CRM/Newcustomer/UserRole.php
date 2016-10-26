@@ -30,7 +30,7 @@ class CRM_Newcustomer_UserRole {
       $drupal_uid = $this->createDrupalUser($cid);
       if ($drupal_uid) {
         //assign role to drupal user
-        //$this->assignRoleToUser($drupal_uid, $config->getDrupalRole());
+        $this->assignRoleToUser($drupal_uid, $config->getDrupalRole());
         //set the message
         try {
           $contact = civicrm_api3('Contact', 'getsingle', array('id' => $cid));
