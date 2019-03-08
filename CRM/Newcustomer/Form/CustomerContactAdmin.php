@@ -10,7 +10,7 @@ require_once 'CRM/Core/Form.php';
 class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
   function buildQuickForm() {
     CRM_Utils_System::setTitle(ts('Settings for customer contact'));
-    
+
     // add form elements
     $this->add(
       'select', // field type
@@ -19,7 +19,7 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
       $this->getDrupalRolesOptions(), // list of options
       true // is required
     );
-    
+
     $this->add(
       'select', // field type
       'relationship_type', // field name
@@ -28,7 +28,7 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
       true, // is required
       array('multiple' => true)
     );
-    
+
     $this->addButtons(array(
       array(
         'type' => 'submit',
@@ -41,10 +41,10 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
     $this->assign('elementNames', $this->getRenderableElementNames());
     parent::buildQuickForm();
   }
-  
+
   function setDefaultValues() {
     parent::setDefaultValues();
-    
+
     $config = CRM_Newcustomer_Config::singleton();
     $values['drupal_role'] = $config->getDrupalRole();
     $values['relationship_type'] = $config->getRelationshipTypes();
@@ -53,29 +53,29 @@ class CRM_Newcustomer_Form_CustomerContactAdmin extends CRM_Core_Form {
   }
 
   function postProcess() {
-    $values = $this->exportValues();    
-    
+    $values = $this->exportValues();
+
     CRM_Core_BAO_Setting::setItem($values['drupal_role'], 'nl.pum.newcustomer', 'new_customer_role_id');
     CRM_Core_BAO_Setting::setItem(serialize($values['relationship_type']), 'nl.pum.newcustomer', 'new_customer_relationship_types');
-    
+
     CRM_Core_Session::setStatus(ts('Saved customer contact settings'), ts('Customer contact settings'), 'success');
-        
+
     parent::postProcess();
   }
 
-  function getDrupalRolesOptions() {    
+  function getDrupalRolesOptions() {
     $options = array(
       '' => ts('- select -')
     );
-    
-    $config = CRM_Expertapplication_Config::singleton();
+
+    $config = CRM_Newcustomer_Config::singleton();
     $roles = $config->getDrupalRoles();
     foreach($roles as $rid => $role) {
       $options[$rid] = $role;
     }
     return $options;
   }
-  
+
   function getRelationshipTypes() {
     $dao = new CRM_Contact_BAO_RelationshipType();
     $dao->is_active = 1;
