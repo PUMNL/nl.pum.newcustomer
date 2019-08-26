@@ -23,13 +23,15 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
             'name' => 'display_name',
             'required' => TRUE,
           ),
-          'id' =>
+          'created_date' =>
           array(
-            'no_display' => TRUE,
+            'title' => ts('Created'),
+            'name' => 'created_date',
             'required' => TRUE,
+            'no_display' => TRUE,
           ),
         ),
-        'grouping' => 'conact_fields',
+        'grouping' => 'contact_fields',
         'filters' => array(
           '_rel_type_id' => array(
             'title' => ts('My relationship to country'),
@@ -63,7 +65,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
             'name' => 'email',
           ),
         ),
-        'grouping' => 'conact_fields',
+        'grouping' => 'contact_fields',
       ),
       'civicrm_relationship_local_rep' =>
       array(
@@ -119,9 +121,16 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
           if (CRM_Utils_Array::value('required', $field) ||
               CRM_Utils_Array::value($fieldName, $this->_params['fields'])
           ) {
-
             if ($fieldName == 'email') {
               $this->_emailField = TRUE;
+            }
+            if ($fieldName == 'display_name') {
+              $this->_localRepField = TRUE;
+              $select[] = "{$this->_aliases['civicrm_contact']}.id as civicrm_contact_id";
+              $this->_columnHeaders["civicrm_contact_id"] = array(
+                'type' => 'int',
+                'no_display' => true,
+              );
             }
             if ($fieldName == 'display_name_lcal_rep') {
               $this->_localRepField = TRUE;
@@ -131,9 +140,19 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
                 'no_display' => true,
               );
             }
-            $select[] = "{$field['dbAlias']} as {$tableName}_{$fieldName}";
-            $this->_columnHeaders["{$tableName}_{$fieldName}"]['type'] = CRM_Utils_Array::value('type', $field);
-            $this->_columnHeaders["{$tableName}_{$fieldName}"]['title'] = CRM_Utils_Array::value('title', $field);
+            if ($fieldName == 'created_date') {
+              $select[] = "DATE_FORMAT({$this->_aliases['civicrm_contact']}.created_date, '%d-%m-%Y') as created_date";
+              $this->_columnHeaders["created_date"] = array(
+                'type' => 'date',
+                'title'=>'Created',
+                'no_display' => false,
+              );
+            } else {
+              $select[] = "{$field['dbAlias']} as {$tableName}_{$fieldName}";
+
+              $this->_columnHeaders["{$tableName}_{$fieldName}"]['type'] = CRM_Utils_Array::value('type', $field);
+              $this->_columnHeaders["{$tableName}_{$fieldName}"]['title'] = CRM_Utils_Array::value('title', $field);
+            }
           }
         }
       }
@@ -157,14 +176,14 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
                          ON ( {$this->_aliases['civicrm_address']}.contact_id =
                                {$this->_aliases['civicrm_contact']}.id AND
                                {$this->_aliases['civicrm_address']}.is_primary = 1 ) ";
-    
-    
+
+
     $pumCountry = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'pumCountry'));
     $pumCountryField = civicrm_api3('CustomField', 'getsingle', array('custom_group_id' => $pumCountry['id'], 'name' => 'civicrm_country_id'));
-                               
+
     $this->_from .= " INNER JOIN {$pumCountry['table_name']} country_contact
                         ON (country_contact.{$pumCountryField['column_name']} = {$this->_aliases['civicrm_address']}.country_id)";
-    
+
     $_rel_type_id = str_replace("_a_b", "" , $this->_params['_rel_type_id_value']);
     $_rel_type_id = str_replace("_b_a", "" , $_rel_type_id);
     $currentUserContactId = $this->getCurrentUsersContactId();
@@ -192,8 +211,8 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
         {$this->_aliases['civicrm_relationship_local_rep']}.relationship_type_id = '{$local_rep_relation_type_id}'
                 AND {$this->_aliases['civicrm_relationship_local_rep']}.contact_id_a = {$this->_aliases['civicrm_contact']}.id
                 AND (
-                  {$this->_aliases['civicrm_relationship_local_rep']}.is_active = '1' 
-                  AND ({$this->_aliases['civicrm_relationship_local_rep']}.start_date IS NULL OR {$this->_aliases['civicrm_relationship_local_rep']}.start_date <= NOW()) 
+                  {$this->_aliases['civicrm_relationship_local_rep']}.is_active = '1'
+                  AND ({$this->_aliases['civicrm_relationship_local_rep']}.start_date IS NULL OR {$this->_aliases['civicrm_relationship_local_rep']}.start_date <= NOW())
                   AND ({$this->_aliases['civicrm_relationship_local_rep']}.end_date IS NULL OR {$this->_aliases['civicrm_relationship_local_rep']}.end_date >= NOW())
                )
       )";
@@ -309,7 +328,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
   }
 
   function orderBy() {
-    $this->_orderBy = " ORDER BY {$this->_aliases['civicrm_contact']}.sort_name";
+    $this->_orderBy = " ORDER BY {$this->_aliases['civicrm_contact']}.created_date DESC";
   }
 
   function postProcess() {
@@ -326,7 +345,6 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
 
     $this->buildACLClause(array($this->_aliases['civicrm_contact']));
     $sql = $this->buildQuery();
-    
     $rows = array();
     $this->buildRows($sql, $rows);
 
@@ -353,7 +371,7 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
         }
         $entryFound = TRUE;
       }
-      
+
       if (array_key_exists('civicrm_address_county_id', $row)) {
         if ($value = $row['civicrm_address_county_id']) {
           $rows[$rowNum]['civicrm_address_countr_id'] = CRM_Core_PseudoConstant::county($value, FALSE);
@@ -383,6 +401,13 @@ class CRM_Newcustomer_Form_Report_MyNewCustomerReport extends CRM_Report_Form {
         $url = CRM_Utils_System::url('civicrm/contact/view', 'reset=1&cid=' . $row['local_rep_id']);
         $rows[$rowNum]['civicrm_contact_local_rep_display_name_lcal_rep_link'] = $url;
         $rows[$rowNum]['civicrm_contact_local_rep_display_name_lcal_rep_hover'] = ts("View Contact details for this contact.");
+        $entryFound = TRUE;
+      }
+
+      if (array_key_exists('civicrm_email_email', $row)) {
+        $url = 'mailto:'.$row['civicrm_email_email'];
+        $rows[$rowNum]['civicrm_email_email_link'] = $url;
+        $rows[$rowNum]['civicrm_email_email_hover'] = ts("Send e-mail to this contact.");
         $entryFound = TRUE;
       }
 
